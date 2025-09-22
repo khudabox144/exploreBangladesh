@@ -6,7 +6,7 @@ const ExploreBangladesh = () => {
   return (
     <section className="relative hero overflow-hidden min-h-screen">
       <img
-        src="/exporeBangladesh.png"
+        src="/ecporeBangladesh.jpg"
         alt="Background of a village in Bangladesh"
         className="object-cover w-full h-full absolute inset-0"
       />

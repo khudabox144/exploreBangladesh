@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const worldData = [
@@ -131,39 +132,46 @@ const worldData = [
   }
 ];
 
+function slugify(text) {
+  return text.toLowerCase().replace(/\s+/g, "-");
+}
+
 const WorldTour = () => {
   return (
     <section className="max-w-7xl mx-auto px-6 py-12 bg-gray-50">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {worldData.map((region, index) => (
-          <div key={index} className="bg-purple-100 rounded-lg shadow-xl hover:shadow-2xl transition">
+          <div
+            key={index}
+            className="bg-purple-100 rounded-lg shadow-xl hover:shadow-2xl transition"
+          >
             {/* Banner with Image + Title */}
             <div
               className="relative h-48 rounded-t-lg overflow-hidden"
               style={{
                 backgroundImage: `linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.05)), url(${region.image})`,
                 backgroundSize: "cover",
-                backgroundPosition: "center",
+                backgroundPosition: "center"
               }}
             >
-              <h2 className="absolute left-4 bottom-4 text-white text-2xl font-bold drop-shadow">{region.continent}</h2>
-              <div className="absolute right-4 top-4 flex space-x-2">
-                <button className="px-4 py-1 bg-white/20 hover:bg-white/40 text-white rounded-full text-sm font-medium transition backdrop-blur-sm">
-                  All Adventures
-                </button>
-                <button className="px-4 py-1 bg-yellow-500 hover:bg-yellow-600 text-white rounded-full text-sm font-medium transition">
-                  Deals
-                </button>
-              </div>
+              <h2 className="absolute left-4 bottom-4 text-white text-2xl font-bold drop-shadow">
+                {region.continent}
+              </h2>
             </div>
 
             {/* Country List */}
             <div className="p-4 grid grid-cols-2 sm:grid-cols-3 gap-4 text-gray-700">
               {region.countries.map((country, idx) => (
-                <div key={idx} className="p-2 bg-purple-50 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
-                  <button className="w-full text-left cursor-pointer text-sm py-1 rounded transition text-purple-800 hover:text-purple-600">
+                <div
+                  key={idx}
+                  className="p-2 bg-purple-50 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
+                >
+                  <Link
+                    href={`/division/sylhet/${slugify(country)}`}
+                    className="w-full block text-left cursor-pointer text-sm py-1 rounded transition text-purple-800 hover:text-purple-600"
+                  >
                     {country}
-                  </button>
+                  </Link>
                 </div>
               ))}
             </div>

@@ -14,40 +14,37 @@ const Star = ({ filled }) => (
 );
 
 const TouristSpotCard = ({ spot }) => {
-  // simplified card: no local modal or favorite state here (keeps markup clean)
-
-  const formattedOriginal = spot.originalPrice?.toLocaleString?.() ?? spot.originalPrice;
-  const formattedDiscounted = spot.discountedPrice?.toLocaleString?.() ?? spot.discountedPrice;
-
   return (
-    <div className="bg-[#f3f7ff] p-4 rounded-2xl shadow-lg">
-      <div className="bg-white rounded-xl overflow-hidden">
-        <div className="relative">
-          <img src={spot.image} alt={spot.name} className="w-full h-44 sm:h-48 object-cover rounded-t-xl" />
-        </div>
+    <div className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col h-full">
+      {/* Image */}
+      <div className="relative">
+        <img
+          src={spot.image}
+          alt={spot.name}
+          className="w-full h-48 object-cover"
+        />
+      </div>
 
-        <div className="p-6">
-          <h3 className="text-2xl font-semibold text-gray-800 mb-2">{spot.name}</h3>
-          <p className="text-gray-500 mb-4">{spot.description}</p>
+      {/* Content */}
+      <div className="flex flex-col flex-1 p-6">
+        <h3 className="text-xl font-bold text-gray-800 mb-2">{spot.name}</h3>
+        <p className="text-gray-500 mb-4 flex-1">{spot.description}</p>
 
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="text-gray-400 line-through text-sm">${formattedOriginal}</div>
-              <div className="text-red-500 font-bold text-xl">${formattedDiscounted}</div>
+        <div className="flex items-center justify-between mt-auto">
+          {/* Rating */}
+          <div className="flex items-center">
+            <div className="flex -space-x-1">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} filled={i < Math.round(spot.rating)} />
+              ))}
             </div>
-
-            <div className="text-right">
-              <div className="text-sm text-gray-600">{spot.days} days</div>
-              <div className="flex items-center mt-2">
-                <div className="flex -space-x-1">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} filled={i < Math.round(spot.rating)} />
-                  ))}
-                </div>
-                <span className="ml-2 text-sm text-gray-600">{spot.rating}</span>
-              </div>
-            </div>
+            <span className="ml-2 text-sm text-gray-600">{spot.rating}</span>
           </div>
+
+          {/* Button */}
+          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+            Visit
+          </button>
         </div>
       </div>
     </div>
